@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HouseRentingSystem.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -14,9 +14,7 @@ namespace HouseRentingSystem.Controllers
         }
 
         public IActionResult Index()
-        {
-            return View();
-        }
+            => View();
 
         public IActionResult Privacy()
         {
