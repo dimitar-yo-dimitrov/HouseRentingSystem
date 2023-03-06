@@ -1,4 +1,5 @@
 ﻿using HouseRentingSystem.Data;
+using Houses.Infrastructure.Data.Common.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace HouseRentingSystem.Extensions
@@ -7,6 +8,8 @@ namespace HouseRentingSystem.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IRepository, Repository>();
+
             return services;
         }
 
@@ -14,7 +17,7 @@ namespace HouseRentingSystem.Extensions
         {
             var connectionString = config.GetConnectionString("DefaultConnection");
 
-            services.AddDbContext<ApplicationDbContext>(options
+            services.AddDbContext<HouseRentingDbContext>(options
                 => options.UseSqlServer(connectionString));
 
             return services;

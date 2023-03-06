@@ -22,7 +22,7 @@ namespace HouseRentingSystem
                 {
                     options.SignIn.RequireConfirmedAccount = true;
                 })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<HouseRentingDbContext>();
 
             builder.Services.AddControllersWithViews()
                 .AddMvcOptions(options =>
