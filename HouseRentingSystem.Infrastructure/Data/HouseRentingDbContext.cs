@@ -1,4 +1,5 @@
-﻿using HouseRentingSystem.Infrastructure.Data.Entities;
+﻿using HouseRentingSystem.Infrastructure.Data.Configurations;
+using HouseRentingSystem.Infrastructure.Data.Entities;
 using HouseRentingSystem.Infrastructure.Data.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,6 @@ namespace HouseRentingSystem.Data
         public HouseRentingDbContext(DbContextOptions<HouseRentingDbContext> options)
             : base(options)
         {
-            this.Database.Migrate();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -19,10 +19,17 @@ namespace HouseRentingSystem.Data
                 .UseLazyLoadingProxies();
         }
 
-        public virtual DbSet<Agent> Agents { get; init; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.ApplyConfiguration(new HouseConfiguration());
 
-        public virtual DbSet<Category> Categories { get; init; }
+            base.OnModelCreating(builder);
+        }
 
-        public virtual DbSet<House> Houses { get; init; }
+        public virtual DbSet<Agent> Agents { get; init; } = null!;
+
+        public virtual DbSet<Category> Categories { get; init; } = null!;
+
+        public virtual DbSet<House> Houses { get; init; } = null!;
     }
 }
