@@ -11,13 +11,13 @@ namespace HouseRentingSystem.Infrastructure.Data.Entities
         }
 
         [Key]
-        public string Id { get; init; }
+        public string Id { get; set; }
 
         [Required]
         [MaxLength(NameMaxLength)]
         public string Name { get; set; } = null!;
 
-        public virtual IEnumerable<House> Houses { get; init; }
+        public virtual IEnumerable<House> Houses { get; set; }
             = new HashSet<House>();
     }
 }

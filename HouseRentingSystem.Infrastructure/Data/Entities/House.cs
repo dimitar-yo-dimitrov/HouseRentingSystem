@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using HouseRentingSystem.Infrastructure.Data.Identity;
 using Microsoft.EntityFrameworkCore;
 using static HouseRentingSystem.Common.GlobalConstants.ValidationConstants.House;
 
@@ -35,13 +36,20 @@ namespace HouseRentingSystem.Infrastructure.Data.Entities
         public decimal PricePerMonth { get; set; }
 
         [ForeignKey(nameof(Category))]
-        public int CategoryId { get; set; }
+        public string CategoryId { get; set; } = null!;
+
         public virtual Category Category { get; set; } = null!;
 
         [ForeignKey(nameof(Agent))]
-        public int AgentId { get; set; }
+        public string AgentId { get; set; } = null!;
+
         public virtual Agent Agent { get; set; } = null!;
 
-        public string RenterId { get; set; } = null!;
+        public string? RenterId { get; set; }
+
+        [ForeignKey(nameof(RenterId))]
+        public virtual ApplicationUser? Renter { get; set; }
+
+        public bool IsActive { get; set; } = true;
     }
 }

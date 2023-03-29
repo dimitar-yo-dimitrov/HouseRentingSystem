@@ -10,7 +10,7 @@ namespace HouseRentingSystem.Infrastructure.Data.Configurations
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
             builder
-                .Property(u => u.IsActive)
+                .Property(au => au.IsActive)
                 .HasDefaultValue(true);
 
             builder.HasData(CreateUser());
@@ -23,7 +23,7 @@ namespace HouseRentingSystem.Infrastructure.Data.Configurations
 
             var user = new ApplicationUser()
             {
-                Id = "dea12856-c198-4129-b3f3-b893d8395082",
+                Id = "2D292230-3008-4480-B0AC-09262553439D",
                 UserName = "agent@mail.com",
                 NormalizedUserName = "agent@mail.com",
                 Email = "agent@mail.com",
@@ -36,7 +36,7 @@ namespace HouseRentingSystem.Infrastructure.Data.Configurations
 
             user = new ApplicationUser()
             {
-                Id = "6d5800ce-d726-4fc8-83d9-d6b3ac1f591e",
+                Id = "AF724889-F204-4573-8D65-ED50557A9B71",
                 UserName = "guest@mail.com",
                 NormalizedUserName = "guest@mail.com",
                 Email = "guest@mail.com",

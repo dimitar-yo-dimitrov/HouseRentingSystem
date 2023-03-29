@@ -30,10 +30,10 @@ namespace HouseRentingSystem.Infrastructure.Data
             base.OnModelCreating(builder);
         }
 
-        public virtual DbSet<Agent> Agents { get; init; } = null!;
+        public virtual DbSet<House> Houses { get; init; } = null!;
 
         public virtual DbSet<Category> Categories { get; init; } = null!;
 
-        public virtual DbSet<House> Houses { get; init; } = null!;
+        public virtual DbSet<Agent> Agents { get; init; } = null!;
     }
 }
