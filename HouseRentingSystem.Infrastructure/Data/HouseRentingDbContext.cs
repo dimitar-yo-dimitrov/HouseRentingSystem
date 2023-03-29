@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace HouseRentingSystem.Data
+namespace HouseRentingSystem.Infrastructure.Data
 {
     public class HouseRentingDbContext : IdentityDbContext<ApplicationUser, IdentityRole, string>
     {

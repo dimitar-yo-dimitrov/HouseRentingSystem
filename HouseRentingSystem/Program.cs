@@ -1,5 +1,5 @@
-using HouseRentingSystem.Data;
 using HouseRentingSystem.Extensions;
+using HouseRentingSystem.Infrastructure.Data;
 using HouseRentingSystem.Infrastructure.Data.Identity;
 using Microsoft.AspNetCore.Mvc;
 

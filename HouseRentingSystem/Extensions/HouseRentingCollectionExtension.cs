@@ -1,5 +1,5 @@
-﻿using HouseRentingSystem.Data;
-using Houses.Infrastructure.Data.Common.Repositories;
+﻿using HouseRentingSystem.Infrastructure.Common.Repositories;
+using HouseRentingSystem.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace HouseRentingSystem.Extensions

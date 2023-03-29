@@ -20,7 +20,8 @@ namespace HouseRentingSystem.Infrastructure.Data.Entities
         public string PhoneNumber { get; set; } = null!;
 
         [ForeignKey(nameof(User))]
-        public string UserId { get; set; }
+        public string UserId { get; set; } = null!;
+
         public virtual ApplicationUser User { get; init; } = null!;
     }
 }

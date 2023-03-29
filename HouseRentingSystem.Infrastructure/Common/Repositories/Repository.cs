@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace Houses.Infrastructure.Data.Common.Repositories
+namespace HouseRentingSystem.Infrastructure.Common.Repositories
 {
     /// <summary>
     /// Implementation of repository access methods
