@@ -7,15 +7,20 @@ namespace HouseRentingSystem.Infrastructure.Data.Entities
 {
     public class Agent
     {
+        public Agent()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
         [Key]
-        public Guid Id { get; init; }
+        public string Id { get; init; }
 
         [Required]
         [MaxLength(PhoneNumberMaxLength)]
         public string PhoneNumber { get; set; } = null!;
 
         [ForeignKey(nameof(User))]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public virtual ApplicationUser User { get; init; } = null!;
     }
 }

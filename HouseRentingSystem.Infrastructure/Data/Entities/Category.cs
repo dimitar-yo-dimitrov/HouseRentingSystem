@@ -5,8 +5,13 @@ namespace HouseRentingSystem.Infrastructure.Data.Entities
 {
     public class Category
     {
+        public Category()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
+
         [Key]
-        public Guid Id { get; init; }
+        public string Id { get; init; }
 
         [Required]
         [MaxLength(NameMaxLength)]
