@@ -2,7 +2,7 @@
 
 namespace HouseRentingSystem.Infrastructure.Data.Identity
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<string>
     {
         public string? FirstName { get; set; }
 
