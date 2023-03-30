@@ -23,7 +23,7 @@ namespace HouseRentingSystem.Infrastructure.Data.Configurations
 
             var user = new ApplicationUser()
             {
-                Id = "2D292230-3008-4480-B0AC-09262553439D",
+                Id = "E305205E-A570-40AE-9644-D4E173B05D0D",
                 UserName = "agent@mail.com",
                 NormalizedUserName = "agent@mail.com",
                 Email = "agent@mail.com",

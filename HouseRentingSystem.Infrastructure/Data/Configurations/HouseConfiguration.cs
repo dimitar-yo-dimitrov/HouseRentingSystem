@@ -38,8 +38,8 @@ namespace HouseRentingSystem.Infrastructure.Data.Configurations
                     ImageUrl =
                         "https://cf.bstatic.com/xdata/images/hotel/max1024x768/179489660.jpg?k=2029f6d9589b49c95dcc9503a265e292c2cdfcb5277487a0050397c3f8dd545a&o=&hp=1",
                     PricePerMonth = 1200.00M,
-                    CategoryId = "B8B415F1-8441-47C3-9F72-E9645531B127",
-                    AgentId = "F384529F-D095-41EF-8129-D2A76E20542E"
+                    CategoryId = "4FDD33D0-218F-4094-B1D4-707403A8ADD4",
+                    AgentId = "E305205E-A570-40AE-9644-D4E173B05D0D"
                 },
                 new House
                 {
@@ -49,8 +49,8 @@ namespace HouseRentingSystem.Infrastructure.Data.Configurations
                     Description = "This luxurious house is everything you will need. It is just excellent.",
                     ImageUrl = "https://i.pinimg.com/originals/a6/f5/85/a6f5850a77633c56e4e4ac4f867e3c00.jpg",
                     PricePerMonth = 2000.00M,
-                    CategoryId = "6ED2D32C-8A59-4E8F-9F24-D8CC86BE5F2C",
-                    AgentId = "99991ACC-C129-42A6-994F-B0E24EF03777"
+                    CategoryId = "4FDD33D0-218F-4094-B1D4-707403A8ADD4",
+                    AgentId = "E305205E-A570-40AE-9644-D4E173B05D0D"
                 }
             };
 
