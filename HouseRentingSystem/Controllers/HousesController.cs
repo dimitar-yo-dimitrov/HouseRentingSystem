@@ -21,14 +21,44 @@ public class HousesController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add()
+    public async Task<IActionResult> Add(HouseFormModel house)
     {
-        return View();
+        return RedirectToAction(nameof(Details), new { id = "1" });
     }
 
     [HttpGet]
     public async Task<IActionResult> Details(int id)
     {
         return View(new HouseDetailsViewModel());
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(string id, HouseFormModel house)
+    {
+        return RedirectToAction(nameof(Details), new { id = "1" });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(string id)
+    {
+        return View(new HouseDetailsViewModel());
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(HouseDetailsViewModel house)
+    {
+        return RedirectToAction(nameof(All));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Rent(string id)
+    {
+        return RedirectToAction(nameof(Mine));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Leave(string id)
+    {
+        return RedirectToAction(nameof(Mine));
     }
 }
