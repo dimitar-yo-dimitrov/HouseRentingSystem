@@ -14,7 +14,7 @@ namespace HouseRentingSystem.Controllers
         }
 
         public IActionResult Index()
-            => View();
+            => View(new IndexViewModel());
 
         public IActionResult Privacy()
         {

@@ -2,6 +2,10 @@
 
 namespace HouseRentingSystem.Controllers;
 
-public class AgentsController : Controller
+public class AgentsController : BaseController
 {
+    public IActionResult Become()
+    {
+        throw new NotImplementedException();
+    }
 }
