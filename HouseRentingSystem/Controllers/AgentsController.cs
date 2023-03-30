@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HouseRentingSystem.Core.ViewModels.Agents;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HouseRentingSystem.Controllers;
 
 public class AgentsController : BaseController
 {
-    public IActionResult Become()
+    public IActionResult Become(BecomeAgentFormModel agent)
     {
-        throw new NotImplementedException();
+        return RedirectToAction(nameof(HousesController.All), "Houses");
     }
 }
