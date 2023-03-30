@@ -25,8 +25,8 @@ namespace HouseRentingSystem.Infrastructure.Data.Configurations
                         "https://www.luxury-architecture.net/wp-content/uploads/2017/12/1513217889-7597-FAIRWAYS-010.jpg",
                     PricePerMonth = 2100.00M,
                     CategoryId = "B8B55D74-60EB-4ED7-AC6D-AC75F4B31179",
-                    AgentId = "E305205E-A570-40AE-9644-D4E173B05D0D",
-                    RenterId = "093E8F21-0CC1-4780-855D-1D221995A50F"
+                    AgentId = "D00DD0BB-783B-4766-AF26-5958608A96FE",
+                    RenterId = "AF724889-F204-4573-8D65-ED50557A9B71"
                 },
                 new House
                 {
@@ -39,7 +39,7 @@ namespace HouseRentingSystem.Infrastructure.Data.Configurations
                         "https://cf.bstatic.com/xdata/images/hotel/max1024x768/179489660.jpg?k=2029f6d9589b49c95dcc9503a265e292c2cdfcb5277487a0050397c3f8dd545a&o=&hp=1",
                     PricePerMonth = 1200.00M,
                     CategoryId = "4FDD33D0-218F-4094-B1D4-707403A8ADD4",
-                    AgentId = "E305205E-A570-40AE-9644-D4E173B05D0D"
+                    AgentId = "D00DD0BB-783B-4766-AF26-5958608A96FE"
                 },
                 new House
                 {
@@ -50,7 +50,7 @@ namespace HouseRentingSystem.Infrastructure.Data.Configurations
                     ImageUrl = "https://i.pinimg.com/originals/a6/f5/85/a6f5850a77633c56e4e4ac4f867e3c00.jpg",
                     PricePerMonth = 2000.00M,
                     CategoryId = "4FDD33D0-218F-4094-B1D4-707403A8ADD4",
-                    AgentId = "E305205E-A570-40AE-9644-D4E173B05D0D"
+                    AgentId = "D00DD0BB-783B-4766-AF26-5958608A96FE"
                 }
             };
 
