@@ -8,9 +8,9 @@ namespace HouseRentingSystem.Core.Services
 {
     public class HouseService : IHouseService
     {
-        private readonly ApplicationDbRepository _repository;
+        private readonly IApplicationDbRepository _repository;
 
-        public HouseService(ApplicationDbRepository repository)
+        public HouseService(IApplicationDbRepository repository)
         {
             _repository = repository;
         }
