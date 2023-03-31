@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\HouseRentingSystem.Common\HouseRentingSystem.Common.csproj" />
     <ProjectReference Include="..\HouseRentingSystem.Infrastructure\HouseRentingSystem.Infrastructure.csproj" />
   </ItemGroup>

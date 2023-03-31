@@ -1,6 +1,6 @@
 ﻿using HouseRentingSystem.Infrastructure.Common.Repositories;
 
-namespace Houses.Infrastructure.Data.Repositories
+namespace HouseRentingSystem.Infrastructure.Data.Repositories
 {
     public interface IApplicationDbRepository : IRepository
     {

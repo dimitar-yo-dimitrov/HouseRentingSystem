@@ -21,13 +21,13 @@ public class HousesController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Add(HouseFormModel house)
+    public async Task<IActionResult> Add(HouseFormModel model)
     {
         return RedirectToAction(nameof(Details), new { id = "1" });
     }
 
     [HttpGet]
-    public async Task<IActionResult> Details(int id)
+    public async Task<IActionResult> Details(string id)
     {
         return View(new HouseDetailsViewModel());
     }

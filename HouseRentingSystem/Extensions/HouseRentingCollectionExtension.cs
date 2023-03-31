@@ -1,6 +1,7 @@
-﻿using HouseRentingSystem.Infrastructure.Data;
+﻿using HouseRentingSystem.Core.Services;
+using HouseRentingSystem.Core.Services.Contracts;
+using HouseRentingSystem.Infrastructure.Data;
 using HouseRentingSystem.Infrastructure.Data.Repositories;
-using Houses.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace HouseRentingSystem.Extensions
@@ -10,6 +11,7 @@ namespace HouseRentingSystem.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
+            services.AddTransient<IHouseService, HouseService>();
 
             return services;
         }
@@ -20,6 +22,8 @@ namespace HouseRentingSystem.Extensions
 
             services.AddDbContext<HouseRentingDbContext>(options
                 => options.UseSqlServer(connectionString));
+
+            services.AddDatabaseDeveloperPageExceptionFilter();
 
             return services;
         }

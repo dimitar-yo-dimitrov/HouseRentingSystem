@@ -5,7 +5,7 @@ namespace HouseRentingSystem.Controllers;
 
 public class AgentsController : BaseController
 {
-    public IActionResult Become(BecomeAgentFormModel agent)
+    public async Task<IActionResult> Become(BecomeAgentFormModel agent)
     {
         return RedirectToAction(nameof(HousesController.All), "Houses");
     }
