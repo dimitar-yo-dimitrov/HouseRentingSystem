@@ -33,7 +33,7 @@ public class AgentsController : BaseController
 
         if (await _agents.UserHasRents(userId))
         {
-            ModelState.AddModelError(ErrorMessage, InfoMessageForAlreadyExistingRent);
+            ModelState.AddModelError("Error", InfoMessageForAlreadyExistingRent);
         }
 
         if (!ModelState.IsValid)
