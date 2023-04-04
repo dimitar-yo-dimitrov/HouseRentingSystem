@@ -19,17 +19,17 @@ namespace HouseRentingSystem.Core.Services
                 .AllReadonly<Agent>()
                 .AnyAsync(a => a.UserId == userId);
 
-        public Task<bool> UserWithPhoneNumberExists(string phoneNumber)
+        public async Task<bool> UserWithPhoneNumberExists(string phoneNumber)
+            => await _repository
+                .AllReadonly<Agent>()
+                .AnyAsync(a => a.PhoneNumber == phoneNumber);
+
+        public async Task<bool> UserHasRents(string userId)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> UserHasRents(string userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Create(string userId, string phoneNumber)
+        public async Task Create(string userId, string phoneNumber)
         {
             throw new NotImplementedException();
         }
