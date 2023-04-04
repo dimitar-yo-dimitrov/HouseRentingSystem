@@ -31,7 +31,14 @@ namespace HouseRentingSystem.Core.Services
 
         public async Task Create(string userId, string phoneNumber)
         {
-            throw new NotImplementedException();
+            var agent = new Agent()
+            {
+                UserId = userId,
+                PhoneNumber = phoneNumber
+            };
+
+            await _repository.AddAsync(agent);
+            await _repository.SaveChangesAsync();
         }
     }
 }

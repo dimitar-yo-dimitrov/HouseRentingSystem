@@ -15,15 +15,34 @@ public class AgentsController : BaseController
         _agents = agents;
     }
 
-    public async Task<IActionResult> Become(BecomeAgentInputModel agent)
+    public async Task<IActionResult> Become(BecomeAgentInputModel model)
     {
-        if (!await _agents.ExistsById(User.Id()))
+        var userId = User.Id();
+
+        if (await _agents.ExistsById(userId))
         {
-            return View(agent);
+            TempData[ErrorMessage] = InfoMessageForExistingAgent;
+
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        TempData[ErrorMessage] = InfoMessage;
+        if (await _agents.UserWithPhoneNumberExists(model.PhoneNumber))
+        {
+            ModelState.AddModelError(nameof(model.PhoneNumber), InfoMessageForExistingPhoneNumber);
+        }
 
-        return RedirectToAction("Index", "Home");
+        if (await _agents.UserHasRents(userId))
+        {
+            ModelState.AddModelError(ErrorMessage, InfoMessageForAlreadyExistingRent);
+        }
+
+        if (!ModelState.IsValid)
+        {
+            return View(model);
+        }
+
+        await _agents.Create(userId, model.PhoneNumber);
+
+        return RedirectToAction(nameof(HousesController.All), "Houses");
     }
 }

@@ -8,6 +8,10 @@
 
         public const string SuccessMessage = "SuccessMessage";
 
-        public const string InfoMessage = "You are already an agent";
+        public const string InfoMessageForExistingAgent = "You are already an agent";
+
+        public const string InfoMessageForExistingPhoneNumber = "Phone number already exists. Enter another one.";
+
+        public const string InfoMessageForAlreadyExistingRent = "Phone number already exists. Enter another one.";
     }
 }
