@@ -15,15 +15,15 @@ public class AgentsController : BaseController
         _agents = agents;
     }
 
-    public async Task<IActionResult> Become(BecomeAgentFormModel agent)
+    public async Task<IActionResult> Become(BecomeAgentInputModel agent)
     {
-        if (await _agents.ExistsById(User.Id()))
+        if (!await _agents.ExistsById(User.Id()))
         {
-            TempData[ErrorMessage] = InfoMessage;
-
-            return RedirectToAction("Index", "Home");
+            return View(agent);
         }
 
-        return View();
+        TempData[ErrorMessage] = InfoMessage;
+
+        return RedirectToAction("Index", "Home");
     }
 }
