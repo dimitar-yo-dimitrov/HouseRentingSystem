@@ -25,9 +25,9 @@ namespace HouseRentingSystem.Core.Services
                 .AnyAsync(a => a.PhoneNumber == phoneNumber);
 
         public async Task<bool> UserHasRents(string userId)
-        {
-            throw new NotImplementedException();
-        }
+            => await _repository
+                .AllReadonly<House>()
+                .AnyAsync(h => h.RenterId == userId);
 
         public async Task Create(string userId, string phoneNumber)
         {
