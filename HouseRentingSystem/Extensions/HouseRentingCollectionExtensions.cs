@@ -6,12 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HouseRentingSystem.Extensions
 {
-    public static class HouseRentingCollectionExtension
+    public static class HouseRentingCollectionExtensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
-            services.AddTransient<IHouseService, HouseService>();
+            services.AddScoped<IHouseService, HouseService>();
+            services.AddScoped<IAgentService, AgentService>();
 
             return services;
         }
