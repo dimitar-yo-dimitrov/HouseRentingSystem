@@ -15,6 +15,7 @@ public class AgentsController : BaseController
         _agents = agents;
     }
 
+    [HttpGet]
     public async Task<IActionResult> Become(BecomeAgentInputModel model)
     {
         var userId = User.Id();

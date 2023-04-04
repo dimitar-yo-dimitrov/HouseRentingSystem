@@ -7,7 +7,6 @@ namespace HouseRentingSystem.Core.ViewModels.Agents
     {
         [Required]
         [StringLength(PhoneNumberMaxLength, MinimumLength = PhoneNumberMinLength)]
-        [Display(Name = "Phone Number")]
         [Phone]
         public string PhoneNumber { get; init; } = null!;
     }
