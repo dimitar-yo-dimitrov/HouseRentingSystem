@@ -22,7 +22,7 @@ namespace HouseRentingSystem.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            var houses = await _houseService.LastThreeHouses();
+            var houses = await _houseService.LastThreeHousesAsync();
 
             return View(houses);
         }

@@ -1,5 +1,6 @@
 ﻿using HouseRentingSystem.Core.Models.Houses;
 using HouseRentingSystem.Core.Services.Contracts;
+using HouseRentingSystem.Extensions;
 using HouseRentingSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +10,14 @@ namespace HouseRentingSystem.Controllers;
 public class HousesController : BaseController
 {
     private readonly IHouseService _houseService;
+    private readonly IAgentService _agentService;
 
-    public HousesController(IHouseService houseService)
+    public HousesController(
+        IHouseService houseService,
+        IAgentService agentService)
     {
         _houseService = houseService;
+        _agentService = agentService;
     }
 
     [HttpGet]
@@ -28,10 +33,28 @@ public class HousesController : BaseController
         return View(new AllHousesQueryModel());
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Add(HouseFormModel model)
+    [HttpGet]
+    public async Task<IActionResult> Add()
     {
-        return RedirectToAction(nameof(Details), new { id = "1" });
+        var userId = User.Id();
+
+        if (!await _agentService.ExistsById(userId))
+        {
+            RedirectToAction(nameof(AgentsController.Become), "Agents");
+        }
+
+        var model = new HouseInputModel
+        {
+            Categories = await _houseService.AllCategoriesAsync()
+        };
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Add(HouseInputModel model)
+    {
+
     }
 
     [HttpGet]
@@ -41,7 +64,7 @@ public class HousesController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Edit(string id, HouseFormModel house)
+    public async Task<IActionResult> Edit(string id, HouseInputModel house)
     {
         return RedirectToAction(nameof(Details), new { id = "1" });
     }
