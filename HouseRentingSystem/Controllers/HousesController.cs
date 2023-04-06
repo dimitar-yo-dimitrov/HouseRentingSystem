@@ -61,7 +61,12 @@ public class HousesController : BaseController
             RedirectToAction(nameof(AgentsController.Become), "Agents");
         }
 
-        if (!ModelState.IsValid)
+        if (!await _houseService.CategoryExistsAsync(model.CategoryId))
+        {
+            ModelState.AddModelError(nameof(model.CategoryId), "Category does not exists");
+        }
+
+        if (ModelState.IsValid)
         {
             model.HouseCategories = await _houseService.AllCategoriesAsync();
 
@@ -76,6 +81,7 @@ public class HousesController : BaseController
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> Details(string id)
     {
         return View(new HouseDetailsViewModel());
