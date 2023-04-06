@@ -16,15 +16,28 @@ public class AgentsController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> Become(BecomeAgentInputModel model)
+    public async Task<IActionResult> Become()
     {
-        var userId = User.Id();
-
-        if (await _agents.ExistsById(userId))
+        if (await _agents.ExistsById(User.Id()))
         {
             TempData[ErrorMessage] = InfoMessageForExistingAgent;
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+        var model = new BecomeAgentInputModel();
+
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Become(BecomeAgentInputModel model)
+    {
+        var userId = User.Id();
+
+        if (!ModelState.IsValid)
+        {
+            return View(model);
         }
 
         if (await _agents.UserWithPhoneNumberExists(model.PhoneNumber))
@@ -35,11 +48,6 @@ public class AgentsController : BaseController
         if (await _agents.UserHasRents(userId))
         {
             ModelState.AddModelError("Error", InfoMessageForAlreadyExistingRent);
-        }
-
-        if (!ModelState.IsValid)
-        {
-            return View(model);
         }
 
         await _agents.Create(userId, model.PhoneNumber);
