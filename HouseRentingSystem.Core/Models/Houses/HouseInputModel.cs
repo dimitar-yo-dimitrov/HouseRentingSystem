@@ -8,8 +8,10 @@ namespace HouseRentingSystem.Core.Models.Houses
     {
         public HouseInputModel()
         {
-            Categories = new HashSet<HouseCategoryServiceModel>();
+            HouseCategories = new HashSet<HouseCategoryServiceModel>();
         }
+
+        public string Id { get; init; } = null!;
 
         [Required]
         [StringLength(TitleMaxLength, MinimumLength = TitleMinLength)]
@@ -36,6 +38,6 @@ namespace HouseRentingSystem.Core.Models.Houses
         [Display(Name = "Category")]
         public string CategoryId { get; init; } = null!;
 
-        public IEnumerable<HouseCategoryServiceModel> Categories { get; set; }
+        public IEnumerable<HouseCategoryServiceModel> HouseCategories { get; set; }
     }
 }

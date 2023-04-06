@@ -1,17 +1,15 @@
-﻿using HouseRentingSystem.Infrastructure.Data.Entities;
-
-namespace HouseRentingSystem.Core.Services.Contracts
+﻿namespace HouseRentingSystem.Core.Services.Contracts
 {
     public interface IAgentService
     {
-        Task<bool> ExistsById(string userId);
+        Task<bool> ExistsByIdAsync(string userId);
 
-        Task<bool> UserWithPhoneNumberExists(string phoneNumber);
+        Task<bool> UserWithPhoneNumberExistsAsync(string phoneNumber);
 
-        Task<bool> UserHasRents(string userId);
+        Task<bool> UserHasRentsAsync(string userId);
 
-        Task Create(string userId, string phoneNumber);
+        Task CreateAsync(string userId, string phoneNumber);
 
-        Task<Agent?> GetAgentIdAsync(string userId);
+        Task<string> GetAgentIdAsync(string userId);
     }
 }

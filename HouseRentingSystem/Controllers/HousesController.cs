@@ -38,14 +38,14 @@ public class HousesController : BaseController
     {
         var userId = User.Id();
 
-        if (!await _agentService.ExistsById(userId))
+        if (!await _agentService.ExistsByIdAsync(userId))
         {
             RedirectToAction(nameof(AgentsController.Become), "Agents");
         }
 
         var model = new HouseInputModel
         {
-            Categories = await _houseService.AllCategoriesAsync()
+            HouseCategories = await _houseService.AllCategoriesAsync()
         };
 
         return View(model);
@@ -56,21 +56,21 @@ public class HousesController : BaseController
     {
         var userId = User.Id();
 
-        if (!await _agentService.ExistsById(userId))
+        if (!await _agentService.ExistsByIdAsync(userId))
         {
             RedirectToAction(nameof(AgentsController.Become), "Agents");
         }
 
         if (!ModelState.IsValid)
         {
-            model.Categories = await _houseService.AllCategoriesAsync();
+            model.HouseCategories = await _houseService.AllCategoriesAsync();
 
             return View(model);
         }
 
         var agentId = await _agentService.GetAgentIdAsync(userId);
 
-        var houseId = await _houseService.CreateAsync(model, agentId!.ToString()!);
+        var houseId = await _houseService.CreateAsync(model, agentId);
 
         return RedirectToAction(nameof(Details), new { id = houseId });
     }

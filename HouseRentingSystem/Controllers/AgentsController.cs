@@ -18,7 +18,7 @@ public class AgentsController : BaseController
     [HttpGet]
     public async Task<IActionResult> Become()
     {
-        if (await _agents.ExistsById(User.Id()))
+        if (await _agents.ExistsByIdAsync(User.Id()))
         {
             TempData[ErrorMessage] = InfoMessageForExistingAgent;
 
@@ -40,17 +40,17 @@ public class AgentsController : BaseController
             return View(model);
         }
 
-        if (await _agents.UserWithPhoneNumberExists(model.PhoneNumber))
+        if (await _agents.UserWithPhoneNumberExistsAsync(model.PhoneNumber))
         {
             ModelState.AddModelError(nameof(model.PhoneNumber), InfoMessageForExistingPhoneNumber);
         }
 
-        if (await _agents.UserHasRents(userId))
+        if (await _agents.UserHasRentsAsync(userId))
         {
             ModelState.AddModelError("Error", InfoMessageForAlreadyExistingRent);
         }
 
-        await _agents.Create(userId, model.PhoneNumber);
+        await _agents.CreateAsync(userId, model.PhoneNumber);
 
         return RedirectToAction(nameof(HousesController.All), "Houses");
     }
