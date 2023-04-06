@@ -1,4 +1,6 @@
-﻿namespace HouseRentingSystem.Core.Services.Contracts
+﻿using HouseRentingSystem.Infrastructure.Data.Entities;
+
+namespace HouseRentingSystem.Core.Services.Contracts
 {
     public interface IAgentService
     {
@@ -9,5 +11,7 @@
         Task<bool> UserHasRents(string userId);
 
         Task Create(string userId, string phoneNumber);
+
+        Task<Agent?> GetAgentIdAsync(string userId);
     }
 }
