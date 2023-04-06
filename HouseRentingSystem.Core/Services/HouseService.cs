@@ -1,4 +1,5 @@
 ﻿using HouseRentingSystem.Core.Models;
+using HouseRentingSystem.Core.Models.Houses;
 using HouseRentingSystem.Core.Services.Contracts;
 using HouseRentingSystem.Infrastructure.Data.Entities;
 using HouseRentingSystem.Infrastructure.Data.Repositories;
@@ -28,5 +29,16 @@ namespace HouseRentingSystem.Core.Services
                 })
                 .Take(3)
                 .ToListAsync();
+
+        public async Task<IEnumerable<HouseCategoryServiceModel>> AllCategories()
+        => await _repository
+            .AllReadonly<Category>()
+            .Select(c => new HouseCategoryServiceModel
+            {
+                Id = c.Id,
+                Name = c.Name
+            })
+            .ToListAsync();
+
     }
 }
