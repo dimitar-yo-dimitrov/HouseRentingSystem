@@ -1,4 +1,4 @@
-﻿using HouseRentingSystem.Core.ViewModels;
+﻿using HouseRentingSystem.Core.Models;
 
 namespace HouseRentingSystem.Core.Services.Contracts
 {

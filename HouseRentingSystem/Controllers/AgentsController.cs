@@ -1,5 +1,5 @@
-﻿using HouseRentingSystem.Core.Services.Contracts;
-using HouseRentingSystem.Core.ViewModels.Agents;
+﻿using HouseRentingSystem.Core.Models.Agents;
+using HouseRentingSystem.Core.Services.Contracts;
 using HouseRentingSystem.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using static HouseRentingSystem.Common.GlobalConstants.ExceptionMessages;

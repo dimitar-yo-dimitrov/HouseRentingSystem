@@ -1,5 +1,5 @@
-﻿using HouseRentingSystem.Core.Services.Contracts;
-using HouseRentingSystem.Core.ViewModels;
+﻿using HouseRentingSystem.Core.Models;
+using HouseRentingSystem.Core.Services.Contracts;
 using HouseRentingSystem.Infrastructure.Data.Entities;
 using HouseRentingSystem.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,4 @@
-﻿namespace HouseRentingSystem.Core.ViewModels
+﻿namespace HouseRentingSystem.Core.Models
 {
     public class HouseIndexServiceModel
     {

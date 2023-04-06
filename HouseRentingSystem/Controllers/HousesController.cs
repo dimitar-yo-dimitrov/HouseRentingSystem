@@ -1,4 +1,5 @@
-﻿using HouseRentingSystem.Core.ViewModels.Houses;
+﻿using HouseRentingSystem.Core.Models.Houses;
+using HouseRentingSystem.Core.Services.Contracts;
 using HouseRentingSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,13 @@ namespace HouseRentingSystem.Controllers;
 
 public class HousesController : BaseController
 {
+    private readonly IHouseService _houseService;
+
+    public HousesController(IHouseService houseService)
+    {
+        _houseService = houseService;
+    }
+
     [HttpGet]
     [AllowAnonymous]
     public async Task<IActionResult> All([FromQuery] AllHousesQueryModel model)

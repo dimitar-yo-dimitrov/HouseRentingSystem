@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static HouseRentingSystem.Common.GlobalConstants.ValidationConstants.Agent;
 
-namespace HouseRentingSystem.Core.ViewModels.Agents
+namespace HouseRentingSystem.Core.Models.Agents
 {
     public class BecomeAgentInputModel
     {

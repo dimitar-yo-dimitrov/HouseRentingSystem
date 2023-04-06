@@ -1,4 +1,4 @@
-﻿namespace HouseRentingSystem.Core.ViewModels.Houses
+﻿namespace HouseRentingSystem.Core.Models.Houses
 {
     public class HouseDetailsViewModel
     {
