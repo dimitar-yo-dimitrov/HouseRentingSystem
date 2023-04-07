@@ -56,8 +56,20 @@ namespace HouseRentingSystem
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapDefaultControllerRoute();
-            app.MapRazorPages();
+            app.UseEndpoints(endpoints =>
+            {
+                app.MapControllerRoute(
+                    name: "Area",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                app.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
+            });
 
             app.Run();
         }

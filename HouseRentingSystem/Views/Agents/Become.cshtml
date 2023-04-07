@@ -10,14 +10,14 @@
 @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"] != null)
 {
     <div class="alert alert-danger" role="alert">
-        @ViewData.ModelState["Error"]!.Errors.First().ErrorMessage
+        @ViewData.ModelState[ErrorMessage]!.Errors.First().ErrorMessage
     </div>
 }
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
         <form method="post">
-            <div class="form-group">
+            <div class="fa-group">
                 <input style="font-family: 'Font Awesome 5 Free'; font-weight: 700;"
                        asp-for="PhoneNumber" class="form-control" placeholder="&#xf095; +359888888888">
                 <span asp-validation-for="PhoneNumber" class="small text-danger"></span>

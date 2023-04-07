@@ -36,7 +36,7 @@ namespace HouseRentingSystem.Core.Models.Houses
         public decimal PricePerMonth { get; init; }
 
         [Display(Name = "Category")]
-        public string CategoryId { get; init; } = null!;
+        public int CategoryId { get; init; }
 
         public IEnumerable<HouseCategoryServiceModel> HouseCategories { get; set; }
     }
