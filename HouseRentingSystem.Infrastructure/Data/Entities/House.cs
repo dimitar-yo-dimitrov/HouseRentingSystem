@@ -8,13 +8,8 @@ namespace HouseRentingSystem.Infrastructure.Data.Entities
 {
     public class House
     {
-        public House()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-
         [Key]
-        public string Id { get; init; }
+        public int Id { get; init; }
 
         [Required]
         [MaxLength(TitleMaxLength)]
@@ -36,12 +31,12 @@ namespace HouseRentingSystem.Infrastructure.Data.Entities
         public decimal PricePerMonth { get; set; }
 
         [ForeignKey(nameof(Category))]
-        public string CategoryId { get; set; } = null!;
+        public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; } = null!;
 
         [ForeignKey(nameof(Agent))]
-        public string AgentId { get; set; } = null!;
+        public int AgentId { get; set; }
 
         public virtual Agent Agent { get; set; } = null!;
 

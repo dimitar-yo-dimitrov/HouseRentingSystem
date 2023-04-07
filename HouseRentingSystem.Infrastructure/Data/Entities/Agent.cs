@@ -7,13 +7,8 @@ namespace HouseRentingSystem.Infrastructure.Data.Entities
 {
     public class Agent
     {
-        public Agent()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-
         [Key]
-        public string Id { get; init; }
+        public int Id { get; init; }
 
         [Required]
         [MaxLength(PhoneNumberMaxLength)]

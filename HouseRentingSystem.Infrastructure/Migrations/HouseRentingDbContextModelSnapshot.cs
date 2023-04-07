@@ -24,8 +24,11 @@ namespace HouseRentingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Entities.Agent", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -45,7 +48,7 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "D00DD0BB-783B-4766-AF26-5958608A96FE",
+                            Id = 1,
                             PhoneNumber = "+359888888888",
                             UserId = "E305205E-A570-40AE-9644-D4E173B05D0D"
                         });
@@ -53,8 +56,11 @@ namespace HouseRentingSystem.Infrastructure.Migrations
 
             modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Entities.Category", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -68,38 +74,39 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "B3D23CE7-7A38-4E00-91E3-BD446A6C1033",
+                            Id = 1,
                             Name = "Cottage"
                         },
                         new
                         {
-                            Id = "4FDD33D0-218F-4094-B1D4-707403A8ADD4",
+                            Id = 2,
                             Name = "Single-Family"
                         },
                         new
                         {
-                            Id = "B8B55D74-60EB-4ED7-AC6D-AC75F4B31179",
+                            Id = 3,
                             Name = "Duplex"
                         });
                 });
 
             modelBuilder.Entity("HouseRentingSystem.Infrastructure.Data.Entities.House", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<string>("AgentId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("AgentId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -138,10 +145,10 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3C3A02DC-DF00-47DA-B053-FB81BB714A90",
+                            Id = 1,
                             Address = "North London, UK (near the border)",
-                            AgentId = "D00DD0BB-783B-4766-AF26-5958608A96FE",
-                            CategoryId = "B8B55D74-60EB-4ED7-AC6D-AC75F4B31179",
+                            AgentId = 1,
+                            CategoryId = 3,
                             Description = "A big house for your whole family. Don't miss to buy a house with three bedrooms.",
                             ImageUrl = "https://www.luxury-architecture.net/wp-content/uploads/2017/12/1513217889-7597-FAIRWAYS-010.jpg",
                             IsActive = true,
@@ -151,10 +158,10 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = "1DFB745D-E948-4375-81AC-3A86EBBFC237",
+                            Id = 2,
                             Address = "Near the Sea Garden in Burgas, Bulgaria",
-                            AgentId = "D00DD0BB-783B-4766-AF26-5958608A96FE",
-                            CategoryId = "4FDD33D0-218F-4094-B1D4-707403A8ADD4",
+                            AgentId = 1,
+                            CategoryId = 2,
                             Description = "It has the best comfort you will ever ask for. With two bedrooms, it is great for your family.",
                             ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1024x768/179489660.jpg?k=2029f6d9589b49c95dcc9503a265e292c2cdfcb5277487a0050397c3f8dd545a&o=&hp=1",
                             IsActive = true,
@@ -163,10 +170,10 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = "BF445967-EF66-41CC-BA39-462CBC7D24DE",
+                            Id = 3,
                             Address = "Boyana Neighbourhood, Sofia, Bulgaria",
-                            AgentId = "D00DD0BB-783B-4766-AF26-5958608A96FE",
-                            CategoryId = "4FDD33D0-218F-4094-B1D4-707403A8ADD4",
+                            AgentId = 1,
+                            CategoryId = 2,
                             Description = "This luxurious house is everything you will need. It is just excellent.",
                             ImageUrl = "https://i.pinimg.com/originals/a6/f5/85/a6f5850a77633c56e4e4ac4f867e3c00.jpg",
                             IsActive = true,
@@ -197,7 +204,7 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool?>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
@@ -255,14 +262,14 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                         {
                             Id = "E305205E-A570-40AE-9644-D4E173B05D0D",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "61e5de36-9f72-4245-985f-9beec84d6219",
+                            ConcurrencyStamp = "babcd80e-4817-4b03-bd0e-ad43aaffc16c",
                             Email = "agent@mail.com",
                             EmailConfirmed = false,
                             IsActive = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "agent@mail.com",
                             NormalizedUserName = "agent@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH6UdjC31egpPKEFrAuSLu1yOAUnCLaoddmuR7kPME7COa7sEtFqtUNRvabeVcaQQw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENk2i3H4W9M0FjdFbixoci/rAIXrdCAkCvERsKZVn1imtUPpef7BzkV9WVuL+OpoUQ==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "agent@mail.com"
@@ -271,14 +278,14 @@ namespace HouseRentingSystem.Infrastructure.Migrations
                         {
                             Id = "AF724889-F204-4573-8D65-ED50557A9B71",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "18b14a1f-c929-4f11-af8a-c1a8f0fbf21d",
+                            ConcurrencyStamp = "00ef81fb-79bc-48ef-91f8-718f5d1ba47c",
                             Email = "guest@mail.com",
                             EmailConfirmed = false,
                             IsActive = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "guest@mail.com",
                             NormalizedUserName = "guest@mail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAENeyfrq+DZ3kmC7o5Dgqaau1az70azkIwNVYjnHA7HiWViwu0q7nTa2RWQGhnWcLJg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOoWfvcADdOMWwNvDBySPSRwdw4So20mc5urovo0yM+IBTCm1PiO/oWKFMlAvanqjA==",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "guest@mail.com"

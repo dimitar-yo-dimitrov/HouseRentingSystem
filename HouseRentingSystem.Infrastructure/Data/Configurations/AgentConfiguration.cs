@@ -10,7 +10,7 @@ namespace HouseRentingSystem.Infrastructure.Data.Configurations
         {
             builder.HasData(new Agent
             {
-                Id = "D00DD0BB-783B-4766-AF26-5958608A96FE",
+                Id = 1,
                 PhoneNumber = "+359888888888",
                 UserId = "E305205E-A570-40AE-9644-D4E173B05D0D"
             });

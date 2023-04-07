@@ -66,7 +66,7 @@ public class HousesController : BaseController
             ModelState.AddModelError(nameof(model.CategoryId), "Category does not exists");
         }
 
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
             model.HouseCategories = await _houseService.AllCategoriesAsync();
 
@@ -75,9 +75,9 @@ public class HousesController : BaseController
 
         var agentId = await _agentService.GetAgentIdAsync(userId);
 
-        var houseId = await _houseService.CreateAsync(model, agentId);
+        //var houseId = await _houseService.CreateAsync(model, agentId);
 
-        return RedirectToAction(nameof(Details), new { id = houseId });
+        return RedirectToAction(nameof(Details)/*, new { id = houseId }*/);
     }
 
     [HttpGet]

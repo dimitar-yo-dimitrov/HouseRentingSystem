@@ -2,12 +2,7 @@
 {
     public class HouseIndexServiceModel
     {
-        public HouseIndexServiceModel()
-        {
-            Id = Guid.NewGuid().ToString();
-        }
-
-        public string Id { get; init; }
+        public int Id { get; init; }
 
         public string Title { get; init; } = null!;
 

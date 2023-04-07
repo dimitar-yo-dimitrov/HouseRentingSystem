@@ -17,17 +17,17 @@ namespace HouseRentingSystem.Infrastructure.Data.Configurations
             {
                 new Category
                 {
-                    Id = "B3D23CE7-7A38-4E00-91E3-BD446A6C1033",
+                    Id = 1,
                     Name = "Cottage"
                 },
                 new Category
                 {
-                    Id = "4FDD33D0-218F-4094-B1D4-707403A8ADD4",
+                    Id = 2,
                     Name = "Single-Family"
                 },
                 new Category
                 {
-                    Id = "B8B55D74-60EB-4ED7-AC6D-AC75F4B31179",
+                    Id = 3,
                     Name = "Duplex"
                 }
             };

@@ -11,7 +11,7 @@ namespace HouseRentingSystem.Core.Models.Houses
             HouseCategories = new HashSet<HouseCategoryServiceModel>();
         }
 
-        public string Id { get; init; } = null!;
+        public int Id { get; init; }
 
         [Required]
         [StringLength(TitleMaxLength, MinimumLength = TitleMinLength)]
