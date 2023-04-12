@@ -1,5 +1,4 @@
-﻿using HouseRentingSystem.Core.Models;
-using HouseRentingSystem.Core.Models.Houses;
+﻿using HouseRentingSystem.Core.Models.Houses;
 using HouseRentingSystem.Core.Services.Contracts;
 using HouseRentingSystem.Infrastructure.Data.Entities;
 using HouseRentingSystem.Infrastructure.Data.Repositories;

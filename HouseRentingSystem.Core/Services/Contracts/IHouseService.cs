@@ -1,5 +1,4 @@
-﻿using HouseRentingSystem.Core.Models;
-using HouseRentingSystem.Core.Models.Houses;
+﻿using HouseRentingSystem.Core.Models.Houses;
 
 namespace HouseRentingSystem.Core.Services.Contracts
 {
