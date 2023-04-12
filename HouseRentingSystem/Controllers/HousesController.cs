@@ -47,7 +47,7 @@ public class HousesController : BaseController
             {
                 _logger.LogWarning(MyLogEvents.GetId, "ExistsById() return false in {0}", DateTime.Now);
 
-                RedirectToAction(nameof(AgentsController.Become), "Agents");
+                return RedirectToAction(nameof(AgentsController.Become), "Agents");
             }
 
             var model = new HouseInputModel
@@ -77,7 +77,7 @@ public class HousesController : BaseController
             {
                 _logger.LogWarning(MyLogEvents.GetId, "ExistsById() return false in {0}", DateTime.Now);
 
-                RedirectToAction(nameof(AgentsController.Become), "Agents");
+                return RedirectToAction(nameof(AgentsController.Become), "Agents");
             }
 
             if (!await _houseService.CategoryExistsAsync(model.CategoryId))
