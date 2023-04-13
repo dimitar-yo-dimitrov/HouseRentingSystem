@@ -16,6 +16,8 @@ namespace HouseRentingSystem.Core.Services.Contracts
             int currentPage = 1,
             int housesPerPage = 1);
 
+        Task<IEnumerable<string>> AllCategoryNamesAsync();
+
         Task<bool> CategoryExistsAsync(int categoryId);
 
         Task<int> CreateAsync(HouseInputModel model, int agentId);
