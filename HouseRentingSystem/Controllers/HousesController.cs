@@ -27,9 +27,9 @@ public class HousesController : BaseController
 
     [HttpGet]
     [AllowAnonymous]
-    public async Task<IActionResult> All([FromQuery] AllHousesQueryModel model)
+    public async Task<IActionResult> All([FromQuery] AllHousesQueryModel query)
     {
-        return View(model);
+        return View(query);
     }
 
     [HttpGet]

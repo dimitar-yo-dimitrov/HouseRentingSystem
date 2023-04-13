@@ -1,4 +1,5 @@
 ﻿using HouseRentingSystem.Core.Models.Houses;
+using HouseRentingSystem.Core.Models.Houses.Enums;
 using HouseRentingSystem.Core.Services.Contracts;
 using HouseRentingSystem.Infrastructure.Data.Entities;
 using HouseRentingSystem.Infrastructure.Data.Repositories;
@@ -38,6 +39,16 @@ namespace HouseRentingSystem.Core.Services
                 Name = c.Name
             })
             .ToListAsync();
+
+        public Task<HousesQueryModel> AllAsync(
+            string? category = null, 
+            string? searchTerm = null, 
+            HouseSorting sorting = HouseSorting.Newest,
+            int currentPage = 1, 
+            int housesPerPage = 1)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<bool> CategoryExistsAsync(int categoryId)
             => await _repository
