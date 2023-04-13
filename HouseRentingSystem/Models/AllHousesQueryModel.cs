@@ -21,6 +21,6 @@ namespace HouseRentingSystem.Models
             = Enumerable.Empty<string>();
 
         public IEnumerable<HouseServiceModel> Houses { get; set; }
-            = Enumerable.Empty<HouseServiceModel>();
+            = new HashSet<HouseServiceModel>();
     }
 }
