@@ -29,6 +29,19 @@ public class HousesController : BaseController
     [AllowAnonymous]
     public async Task<IActionResult> All([FromQuery] AllHousesQueryModel query)
     {
+        var result = await _houseService.AllAsync(
+            query.Category,
+            query.SearchTerm,
+            query.Sorting,
+            query.CurrentPage,
+            AllHousesQueryModel.HousesPerPage);
+
+        query.TotalHousesCount = result.TotalHousesCount;
+        query.Houses = result.Houses;
+
+        var houseCategories = await _houseService.AllCategoryNamesAsync();
+        query.Categories = houseCategories;
+
         return View(query);
     }
 
