@@ -1,4 +1,5 @@
-﻿using HouseRentingSystem.Core.Models.Houses;
+﻿using System.ComponentModel.DataAnnotations;
+using HouseRentingSystem.Core.Models.Houses;
 using HouseRentingSystem.Core.Models.Houses.Enums;
 
 namespace HouseRentingSystem.Models
@@ -9,6 +10,7 @@ namespace HouseRentingSystem.Models
 
         public string? Category { get; set; }
 
+        [Display(Name = "Search by text")]
         public string? SearchTerm { get; set; }
 
         public HouseSorting Sorting { get; set; }

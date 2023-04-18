@@ -127,5 +127,45 @@ namespace HouseRentingSystem.Core.Services
 
             return house.Id;
         }
+
+        public async Task<IEnumerable<HouseServiceModel>> AllHousesByAgentIdAsync(int agentId)
+        {
+            var houses = await _repository.AllReadonly<House>()
+                .Where(h => h.IsActive)
+                .Where(a => a.AgentId == agentId)
+                .Select(h => new HouseServiceModel
+                {
+                    Id = h.Id,
+                    Title = h.Title,
+                    ImageUrl = h.ImageUrl,
+                    IsRented = h.RenterId != null,
+                    PricePerMonth = h.PricePerMonth,
+                    Address = h.Address
+
+                })
+                .ToListAsync();
+
+            return houses;
+        }
+
+        public async Task<IEnumerable<HouseServiceModel>> AllHousesByUserIdAsync(string userId)
+        {
+            var houses = await _repository.AllReadonly<House>()
+                .Where(h => h.IsActive)
+                .Where(a => a.RenterId == userId)
+                .Select(h => new HouseServiceModel
+                {
+                    Id = h.Id,
+                    Title = h.Title,
+                    ImageUrl = h.ImageUrl,
+                    IsRented = h.RenterId != null,
+                    PricePerMonth = h.PricePerMonth,
+                    Address = h.Address
+
+                })
+                .ToListAsync();
+
+            return houses;
+        }
     }
 }
