@@ -24,5 +24,8 @@ namespace HouseRentingSystem.Models
 
         public IEnumerable<HouseServiceModel> Houses { get; set; }
             = new HashSet<HouseServiceModel>();
+
+        //public IEnumerable<PropertyServiceViewModel> Properties { get; set; }
+        //    = new HashSet<PropertyServiceViewModel>();
     }
 }

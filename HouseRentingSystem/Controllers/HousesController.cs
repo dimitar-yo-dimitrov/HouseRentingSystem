@@ -48,9 +48,9 @@ public class HousesController : BaseController
     [HttpGet]
     public async Task<IActionResult> Mine()
     {
-        IEnumerable<HouseServiceModel> myHouses;
-
         var userId = User.Id();
+
+        IEnumerable<HouseServiceModel> myHouses;
 
         if (await _agentService.ExistsByIdAsync(userId))
         {
