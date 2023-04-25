@@ -29,41 +29,59 @@ public class HousesController : BaseController
     [AllowAnonymous]
     public async Task<IActionResult> All([FromQuery] AllHousesQueryModel query)
     {
-        var result = await _houseService.AllAsync(
-            query.Category,
-            query.SearchTerm,
-            query.Sorting,
-            query.CurrentPage,
-            AllHousesQueryModel.HousesPerPage);
+        try
+        {
+            var result = await _houseService.AllAsync(
+                query.Category,
+                query.SearchTerm,
+                query.Sorting,
+                query.CurrentPage,
+                AllHousesQueryModel.HousesPerPage);
 
-        query.TotalHousesCount = result.TotalHousesCount;
-        query.Houses = result.Houses;
+            query.TotalHousesCount = result.TotalHousesCount;
+            query.Houses = result.Houses;
 
-        var houseCategories = await _houseService.AllCategoryNamesAsync();
-        query.Categories = houseCategories;
+            var houseCategories = await _houseService.AllCategoryNamesAsync();
+            query.Categories = houseCategories;
 
-        return View(query);
+            return View(query);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong: {ex}", nameof(All));
+
+            return NotFound(ex.Message);
+        }
     }
 
     [HttpGet]
     public async Task<IActionResult> Mine()
     {
-        var userId = User.Id();
-
-        IEnumerable<HouseServiceModel> myHouses;
-
-        if (await _agentService.ExistsByIdAsync(userId))
+        try
         {
-            var currentAgentId = await _agentService.GetAgentIdAsync(userId);
+            var userId = User.Id();
 
-            myHouses = await _houseService.AllHousesByAgentIdAsync(currentAgentId);
+            IEnumerable<HouseServiceModel> myHouses;
+
+            if (await _agentService.ExistsByIdAsync(userId))
+            {
+                var currentAgentId = await _agentService.GetAgentIdAsync(userId);
+
+                myHouses = await _houseService.AllHousesByAgentIdAsync(currentAgentId);
+            }
+            else
+            {
+                myHouses = await _houseService.AllHousesByUserIdAsync(userId);
+            }
+
+            return View(myHouses);
         }
-        else
+        catch (Exception ex)
         {
-            myHouses = await _houseService.AllHousesByUserIdAsync(userId);
-        }
+            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong: {ex}", nameof(Mine));
 
-        return View(myHouses);
+            return NotFound(ex.Message);
+        }
     }
 
     [HttpGet]
@@ -138,7 +156,18 @@ public class HousesController : BaseController
     [AllowAnonymous]
     public async Task<IActionResult> Details(string id)
     {
-        return View(new HouseDetailsViewModel());
+        try
+        {
+
+
+            return View(new HouseDetailsServiceModel());
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong: {ex}", nameof(Details));
+
+            return NotFound(ex.Message);
+        }
     }
 
     [HttpPost]
@@ -150,11 +179,11 @@ public class HousesController : BaseController
     [HttpGet]
     public async Task<IActionResult> Delete(string id)
     {
-        return View(new HouseDetailsViewModel());
+        return View(new HouseDetailsServiceModel());
     }
 
     [HttpPost]
-    public async Task<IActionResult> Delete(HouseDetailsViewModel house)
+    public async Task<IActionResult> Delete(HouseDetailsServiceModel house)
     {
         return RedirectToAction(nameof(All));
     }

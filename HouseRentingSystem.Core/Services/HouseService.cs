@@ -1,4 +1,5 @@
-﻿using HouseRentingSystem.Core.Models.Houses;
+﻿using HouseRentingSystem.Core.Models.Agents;
+using HouseRentingSystem.Core.Models.Houses;
 using HouseRentingSystem.Core.Models.Houses.Enums;
 using HouseRentingSystem.Core.Services.Contracts;
 using HouseRentingSystem.Infrastructure.Data.Entities;
@@ -130,8 +131,8 @@ namespace HouseRentingSystem.Core.Services
 
         public async Task<IEnumerable<HouseServiceModel>> AllHousesByAgentIdAsync(int agentId)
         {
-            var houses = await _repository.AllReadonly<House>()
-                .Where(h => h.IsActive)
+            var houses = await _repository
+                .AllReadonly<House>(h => h.IsActive)
                 .Where(a => a.AgentId == agentId)
                 .Select(h => new HouseServiceModel
                 {
@@ -150,8 +151,8 @@ namespace HouseRentingSystem.Core.Services
 
         public async Task<IEnumerable<HouseServiceModel>> AllHousesByUserIdAsync(string userId)
         {
-            var houses = await _repository.AllReadonly<House>()
-                .Where(h => h.IsActive)
+            var houses = await _repository
+                .AllReadonly<House>(h => h.IsActive)
                 .Where(a => a.RenterId == userId)
                 .Select(h => new HouseServiceModel
                 {
@@ -167,5 +168,36 @@ namespace HouseRentingSystem.Core.Services
 
             return houses;
         }
+
+        public async Task<bool> ExistsAsync(int id)
+            => await _repository
+                .AllReadonly<House>()
+                .AnyAsync(h => h.Id == id);
+
+        public async Task<HouseDetailsServiceModel> HouseDetailsByIdAsync(int id)
+        {
+            var houseDetails = await _repository
+                .AllReadonly<House>(h => h.Id == id)
+                .Select(h => new HouseDetailsServiceModel
+                {
+                    Id = h.Id,
+                    Title = h.Title,
+                    ImageUrl = h.ImageUrl,
+                    Address = h.Address,
+                    Description = h.Description,
+                    PricePerMonth = h.PricePerMonth,
+                    IsRented = h.RenterId != null,
+                    Category = h.Category.Name,
+                    Agent = new AgentServiceModel
+                    {
+                        PhoneNumber = h.Agent.PhoneNumber,
+                        Email = h.Agent.User.Email
+                    }
+                })
+                .FirstOrDefaultAsync();
+
+            return houseDetails!;
+        }
+
     }
 }
