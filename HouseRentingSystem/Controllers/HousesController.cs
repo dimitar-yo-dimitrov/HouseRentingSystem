@@ -187,14 +187,33 @@ public class HousesController : BaseController
                 return RedirectToAction(nameof(All));
             }
 
-            if (await _houseService.ha)
+            if (await _houseService.HasAgentWithId(id, User.Id()) == false)
             {
+                _logger.LogInformation("User with id {0} attempted to open other agent house", User.Id());
 
+                return RedirectToPage("Account/AccessDenied", new { area = "Identity" });
             }
+
+            var house = await _houseService.HouseDetailsByIdAsync(id);
+            var houseCategoryId = await _houseService.GetHouseCategoryId(id);
+
+            var model = new HouseInputModel
+            {
+                Id = id,
+                Address = house.Address,
+                Description = house.Description,
+                CategoryId = houseCategoryId,
+                Title = house.Title,
+                PricePerMonth = house.PricePerMonth,
+                ImageUrl = house.ImageUrl,
+                HouseCategories = await _houseService.AllCategoriesAsync()
+            };
+
+            return View(model);
         }
         catch (Exception ex)
         {
-            _logger.LogInformation("User with id {0} attempted to open other agent house", User.Id());
+            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong: {ex}", nameof(Edit));
 
             return NotFound(ex.Message);
         }

@@ -238,5 +238,13 @@ namespace HouseRentingSystem.Core.Services
 
             return result;
         }
+
+        public async Task<int> GetHouseCategoryId(int houseId)
+        {
+            var houseCategoryId = await _repository
+                .GetByIdAsync<House>(houseId);
+
+            return houseCategoryId.CategoryId;
+        }
     }
 }
