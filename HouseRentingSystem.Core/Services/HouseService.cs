@@ -1,4 +1,5 @@
-﻿using HouseRentingSystem.Core.Models.Agents;
+﻿using HouseRentingSystem.Common.GlobalConstants;
+using HouseRentingSystem.Core.Models.Agents;
 using HouseRentingSystem.Core.Models.Houses;
 using HouseRentingSystem.Core.Models.Houses.Enums;
 using HouseRentingSystem.Core.Services.Contracts;
@@ -176,6 +177,12 @@ namespace HouseRentingSystem.Core.Services
 
         public async Task<HouseDetailsServiceModel> HouseDetailsByIdAsync(int id)
         {
+            if (id == null)
+            {
+                throw new NullReferenceException(
+                    string.Format(ExceptionMessages.IdIsNull));
+            }
+
             var houseDetails = await _repository
                 .AllReadonly<House>(h => h.Id == id)
                 .Select(h => new HouseDetailsServiceModel

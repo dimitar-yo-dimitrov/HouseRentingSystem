@@ -17,5 +17,7 @@
         public const string PricePerMonthMessage = "Price Per Month must be a positive number and less than {2} leva.";
 
         public const string MessageAboutNonExistingCategory = "Category does not exists.";
+
+        public const string IdIsNull = "Id is not found.";
     }
 }

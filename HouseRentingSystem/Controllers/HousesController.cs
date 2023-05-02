@@ -154,13 +154,20 @@ public class HousesController : BaseController
 
     [HttpGet]
     [AllowAnonymous]
-    public async Task<IActionResult> Details(string id)
+    public async Task<IActionResult> Details(int id)
     {
         try
         {
+            if (await _houseService.ExistsAsync(id) == false)
+            {
+                _logger.LogWarning(MyLogEvents.GetId, "ExistsById() return false in {0}", DateTime.Now);
 
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
 
-            return View(new HouseDetailsServiceModel());
+            var houseModel = await _houseService.HouseDetailsByIdAsync(id);
+
+            return View(houseModel);
         }
         catch (Exception ex)
         {
