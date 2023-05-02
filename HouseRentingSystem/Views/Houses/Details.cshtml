@@ -23,20 +23,20 @@
             <p>@Model.Description</p>
             <p>Category: <b>@Model.Category</b></p>
             <p><i>(@(Model.IsRented ? "Rented" : "Not Rented"))</i></p>
-            <div class="form-check-inline">
+            <div class="form-inline">
                 @if (this.User.Identity!.IsAuthenticated)
                 {
                     <a class="btn btn-warning" asp-controller="Houses" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-                    <a class="mt-2 btn btn-danger" asp-controller="Houses" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                    <a class="ml-2 btn btn-danger" asp-controller="Houses" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
                     @if (!Model.IsRented)
                     {
-                        <form class="mt-2" asp-controller="Houses" asp-action="Rent" asp-route-id="@Model.Id" method="post">
+                        <form class="ml-2" asp-controller="Houses" asp-action="Rent" asp-route-id="@Model.Id" method="post">
                             <input class="btn btn-primary" type="submit" value="Rent" />
                         </form>
                     }
                     else
                     {
-                        <form class="mt-2" asp-controller="Houses" asp-action="Leave" asp-route-id="@Model.Id" method="post">
+                        <form class="ml-2" asp-controller="Houses" asp-action="Leave" asp-route-id="@Model.Id" method="post">
                             <input class="btn btn-primary" type="submit" value="Leave" />
                         </form>
                     }
