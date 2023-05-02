@@ -33,7 +33,7 @@ namespace HouseRentingSystem.Core.Services
                 .ToListAsync();
 
         public async Task<IEnumerable<HouseCategoryServiceModel>> AllCategoriesAsync()
-        => await _repository
+            => await _repository
             .AllReadonly<Category>()
             .Select(c => new HouseCategoryServiceModel
             {
@@ -208,7 +208,8 @@ namespace HouseRentingSystem.Core.Services
 
         public async Task EditAsync(int houseId, HouseInputModel model)
         {
-            var house = await _repository.GetByIdAsync<House>(houseId);
+            var house = await _repository
+                .GetByIdAsync<House>(houseId);
 
             house.Title = model.Title;
             house.ImageUrl = model.ImageUrl;
@@ -218,6 +219,24 @@ namespace HouseRentingSystem.Core.Services
             house.CategoryId = model.CategoryId;
 
             await _repository.SaveChangesAsync();
+        }
+
+        public async Task<bool> HasAgentWithId(int houseId, string currentUserId)
+        {
+            bool result = false;
+
+            var house = await _repository
+                .AllReadonly<House>(h => h.IsActive)
+                .Where(h => h.Id == houseId)
+                .FirstOrDefaultAsync();
+
+            if (house?.Agent != null &&
+                house.Agent.UserId == currentUserId)
+            {
+                result = true;
+            }
+
+            return result;
         }
     }
 }

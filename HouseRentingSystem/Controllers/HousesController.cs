@@ -177,6 +177,29 @@ public class HousesController : BaseController
         }
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        try
+        {
+            if (await _houseService.ExistsAsync(id) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            if (await _houseService.ha)
+            {
+
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogInformation("User with id {0} attempted to open other agent house", User.Id());
+
+            return NotFound(ex.Message);
+        }
+    }
+
     [HttpPost]
     public async Task<IActionResult> Edit(string id, HouseInputModel house)
     {
