@@ -228,6 +228,7 @@ namespace HouseRentingSystem.Core.Services
             var house = await _repository
                 .AllReadonly<House>(h => h.IsActive)
                 .Where(h => h.Id == houseId)
+                //.Include(h => h.Agent)
                 .FirstOrDefaultAsync();
 
             if (house?.Agent != null &&

@@ -220,9 +220,51 @@ public class HousesController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Edit(string id, HouseInputModel house)
+    public async Task<IActionResult> Edit(int id, HouseInputModel house)
     {
-        return RedirectToAction(nameof(Details), new { id = "1" });
+        try
+        {
+            if (house == null)
+            {
+                throw new ArgumentException(string.Format(IdIsNull));
+            }
+
+            if (id != house.Id)
+            {
+                return RedirectToPage("Account/AccessDenied", new { area = "Identity" });
+            }
+
+            if (await _houseService.HasAgentWithId(id, User.Id()) == false)
+            {
+                _logger.LogInformation("User with id {0} attempted to open other agent house", User.Id());
+
+                return RedirectToPage("Account/AccessDenied", new { area = "Identity" });
+            }
+
+            if (await _houseService.ExistsAsync(id) == false)
+            {
+                ModelState.AddModelError("", "The house does not exist!");
+
+                house.HouseCategories = await _houseService.AllCategoriesAsync();
+
+                return View(house);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(house);
+            }
+
+            await _houseService.EditAsync(id, house);
+
+            return RedirectToAction(nameof(Details), new { id });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong: {ex}", nameof(Edit));
+
+            return NotFound(ex.Message);
+        }
     }
 
     [HttpGet]
