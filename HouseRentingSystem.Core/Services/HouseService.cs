@@ -206,5 +206,18 @@ namespace HouseRentingSystem.Core.Services
             return houseDetails!;
         }
 
+        public async Task EditAsync(int houseId, HouseInputModel model)
+        {
+            var house = await _repository.GetByIdAsync<House>(houseId);
+
+            house.Title = model.Title;
+            house.ImageUrl = model.ImageUrl;
+            house.Address = model.Address;
+            house.Description = model.Description;
+            house.PricePerMonth = model.PricePerMonth;
+            house.CategoryId = model.CategoryId;
+
+            await _repository.SaveChangesAsync();
+        }
     }
 }
