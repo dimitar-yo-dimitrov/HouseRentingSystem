@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using HouseRentingSystem.Core.Models.Houses;
 using HouseRentingSystem.Core.Models.Houses.Enums;
 
-namespace HouseRentingSystem.Models
+namespace HouseRentingSystem.Core.Models.Houses
 {
     public class AllHousesQueryModel
     {

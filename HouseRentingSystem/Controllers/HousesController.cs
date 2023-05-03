@@ -1,7 +1,6 @@
 ﻿using HouseRentingSystem.Core.Models.Houses;
 using HouseRentingSystem.Core.Services.Contracts;
 using HouseRentingSystem.Extensions;
-using HouseRentingSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static HouseRentingSystem.Common.GlobalConstants.ExceptionMessages;
@@ -60,6 +59,14 @@ public class HousesController : BaseController
         try
         {
             var userId = User.Id();
+
+            _logger.LogInformation(MyLogEvents.GetId, "Getting id {0} at {1}", userId, DateTime.Now);
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new NullReferenceException(
+                    string.Format(IdIsNull));
+            }
 
             IEnumerable<HouseServiceModel> myHouses;
 
