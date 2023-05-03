@@ -233,7 +233,7 @@ public class HousesController : BaseController
         {
             if (house == null)
             {
-                throw new ArgumentException(string.Format(IdIsNull));
+                throw new ArgumentNullException(string.Format(TheModelIsNull));
             }
 
             if (id != house.Id)
@@ -313,7 +313,42 @@ public class HousesController : BaseController
     [HttpPost]
     public async Task<IActionResult> Delete(HouseDetailsServiceModel house)
     {
-        return RedirectToAction(nameof(All));
+        try
+        {
+            if (house == null)
+            {
+                throw new ArgumentNullException(string.Format(TheModelIsNull));
+            }
+
+            if (await _houseService.HasAgentWithId(house.Id, User.Id()) == false)
+            {
+                _logger.LogInformation("User with id {0} attempted to open other agent house", User.Id());
+
+                return RedirectToPage("Account/AccessDenied", new { area = "Identity" });
+            }
+
+            if (await _houseService.ExistsAsync(house.Id) == false)
+            {
+                ModelState.AddModelError("", "The house does not exist!");
+
+                return View(house);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(house);
+            }
+
+            await _houseService.DeleteAsync(house.Id);
+
+            return RedirectToAction(nameof(All));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong HttpPost: {ex}", nameof(Delete));
+
+            return NotFound(ex.Message);
+        }
     }
 
     [HttpPost]

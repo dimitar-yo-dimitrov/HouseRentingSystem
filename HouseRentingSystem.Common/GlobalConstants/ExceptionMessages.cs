@@ -19,5 +19,7 @@
         public const string MessageAboutNonExistingCategory = "Category does not exists.";
 
         public const string IdIsNull = "Id is not found.";
+
+        public const string TheModelIsNull = "Model is not found.";
     }
 }
