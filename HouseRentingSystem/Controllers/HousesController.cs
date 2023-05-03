@@ -293,7 +293,7 @@ public class HousesController : BaseController
 
             var house = await _houseService.HouseDetailsByIdAsync(id);
 
-            var model = new HouseInputModel
+            var model = new HouseDetailsViewModel()
             {
                 Address = house.Address,
                 Title = house.Title,
@@ -311,7 +311,7 @@ public class HousesController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Delete(HouseDetailsServiceModel house)
+    public async Task<IActionResult> Delete(HouseDetailsViewModel house)
     {
         try
         {
@@ -331,11 +331,6 @@ public class HousesController : BaseController
             {
                 ModelState.AddModelError("", "The house does not exist!");
 
-                return View(house);
-            }
-
-            if (!ModelState.IsValid)
-            {
                 return View(house);
             }
 
