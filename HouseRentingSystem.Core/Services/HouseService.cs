@@ -227,6 +227,15 @@ namespace HouseRentingSystem.Core.Services
             return houseCategoryId.CategoryId;
         }
 
+        public async Task DeleteAsync(int houseId)
+        {
+            var house = await _repository.GetByIdAsync<House>(houseId);
+
+            house.IsActive = false;
+
+            await _repository.SaveChangesAsync();
+        }
+
         private static IEnumerable<HouseServiceModel> ProjectToModel(IEnumerable<House> houses)
         {
             var resultHouses = houses
