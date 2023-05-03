@@ -213,7 +213,7 @@ public class HousesController : BaseController
         }
         catch (Exception ex)
         {
-            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong: {ex}", nameof(Edit));
+            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong in HttpGet: {ex}", nameof(Edit));
 
             return NotFound(ex.Message);
         }
@@ -261,7 +261,7 @@ public class HousesController : BaseController
         }
         catch (Exception ex)
         {
-            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong: {ex}", nameof(Edit));
+            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong HttpPost: {ex}", nameof(Edit));
 
             return NotFound(ex.Message);
         }

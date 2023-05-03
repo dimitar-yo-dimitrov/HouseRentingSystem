@@ -135,19 +135,9 @@ namespace HouseRentingSystem.Core.Services
             var houses = await _repository
                 .AllReadonly<House>(h => h.IsActive)
                 .Where(a => a.AgentId == agentId)
-                .Select(h => new HouseServiceModel
-                {
-                    Id = h.Id,
-                    Title = h.Title,
-                    ImageUrl = h.ImageUrl,
-                    IsRented = h.RenterId != null,
-                    PricePerMonth = h.PricePerMonth,
-                    Address = h.Address
-
-                })
                 .ToListAsync();
 
-            return houses;
+            return ProjectToModel(houses);
         }
 
         public async Task<IEnumerable<HouseServiceModel>> AllHousesByUserIdAsync(string userId)
@@ -155,19 +145,9 @@ namespace HouseRentingSystem.Core.Services
             var houses = await _repository
                 .AllReadonly<House>(h => h.IsActive)
                 .Where(a => a.RenterId == userId)
-                .Select(h => new HouseServiceModel
-                {
-                    Id = h.Id,
-                    Title = h.Title,
-                    ImageUrl = h.ImageUrl,
-                    IsRented = h.RenterId != null,
-                    PricePerMonth = h.PricePerMonth,
-                    Address = h.Address
-
-                })
                 .ToListAsync();
 
-            return houses;
+            return ProjectToModel(houses);
         }
 
         public async Task<bool> ExistsAsync(int id)
@@ -226,9 +206,8 @@ namespace HouseRentingSystem.Core.Services
             bool result = false;
 
             var house = await _repository
-                .AllReadonly<House>(h => h.IsActive)
+                .All<House>(h => h.IsActive)
                 .Where(h => h.Id == houseId)
-                //.Include(h => h.Agent)
                 .FirstOrDefaultAsync();
 
             if (house?.Agent != null &&
@@ -246,6 +225,24 @@ namespace HouseRentingSystem.Core.Services
                 .GetByIdAsync<House>(houseId);
 
             return houseCategoryId.CategoryId;
+        }
+
+        private static IEnumerable<HouseServiceModel> ProjectToModel(IEnumerable<House> houses)
+        {
+            var resultHouses = houses
+                .Select(h => new HouseServiceModel
+                {
+                    Id = h.Id,
+                    Title = h.Title,
+                    ImageUrl = h.ImageUrl,
+                    IsRented = h.RenterId != null,
+                    PricePerMonth = h.PricePerMonth,
+                    Address = h.Address
+
+                })
+                .ToList();
+
+            return resultHouses;
         }
     }
 }
