@@ -112,7 +112,7 @@ public class HousesController : BaseController
         }
         catch (Exception ex)
         {
-            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong: {ex}", nameof(Add));
+            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong in HttpGet: {ex}", nameof(Add));
 
             return NotFound(ex.Message);
         }
@@ -153,7 +153,7 @@ public class HousesController : BaseController
         }
         catch (Exception ex)
         {
-            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong: {ex}", nameof(Add));
+            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong in HttpPost: {ex}", nameof(Add));
 
             return NotFound(ex.Message);
         }
@@ -275,9 +275,39 @@ public class HousesController : BaseController
     }
 
     [HttpGet]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
-        return View(new HouseDetailsServiceModel());
+        try
+        {
+            if (await _houseService.ExistsAsync(id) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            if (await _houseService.HasAgentWithId(id, User.Id()) == false)
+            {
+                _logger.LogInformation("User with id {0} attempted to open other agent house", User.Id());
+
+                return RedirectToPage("Account/AccessDenied", new { area = "Identity" });
+            }
+
+            var house = await _houseService.HouseDetailsByIdAsync(id);
+
+            var model = new HouseInputModel
+            {
+                Address = house.Address,
+                Title = house.Title,
+                ImageUrl = house.ImageUrl,
+            };
+
+            return View(model);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong in HttpGet: {ex}", nameof(Delete));
+
+            return NotFound(ex.Message);
+        }
     }
 
     [HttpPost]
