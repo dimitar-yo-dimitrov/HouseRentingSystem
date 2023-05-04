@@ -188,8 +188,7 @@ namespace HouseRentingSystem.Core.Services
 
         public async Task EditAsync(int houseId, HouseInputModel model)
         {
-            var house = await _repository
-                .GetByIdAsync<House>(houseId);
+            var house = await GetHouseByIdAsync(houseId);
 
             house.Title = model.Title;
             house.ImageUrl = model.ImageUrl;
@@ -221,15 +220,14 @@ namespace HouseRentingSystem.Core.Services
 
         public async Task<int> GetHouseCategoryId(int houseId)
         {
-            var houseCategoryId = await _repository
-                .GetByIdAsync<House>(houseId);
+            var houseCategoryId = await GetHouseByIdAsync(houseId);
 
             return houseCategoryId.CategoryId;
         }
 
         public async Task DeleteAsync(int houseId)
         {
-            var house = await _repository.GetByIdAsync<House>(houseId);
+            var house = await GetHouseByIdAsync(houseId);
 
             house.IsActive = false;
 
@@ -251,9 +249,17 @@ namespace HouseRentingSystem.Core.Services
 
         public async Task RentAsync(int houseId, string userId)
         {
-            var house = await _repository.GetByIdAsync<House>(houseId);
+            var house = await GetHouseByIdAsync(houseId);
 
             house.RenterId = userId;
+            await _repository.SaveChangesAsync();
+        }
+
+        public async Task Leave(int houseId)
+        {
+            var house = await GetHouseByIdAsync(houseId);
+
+            house.RenterId = null;
             await _repository.SaveChangesAsync();
         }
 
@@ -273,6 +279,11 @@ namespace HouseRentingSystem.Core.Services
                 .ToList();
 
             return resultHouses;
+        }
+
+        private async Task<House> GetHouseByIdAsync(int houseId)
+        {
+            return await _repository.GetByIdAsync<House>(houseId);
         }
     }
 }

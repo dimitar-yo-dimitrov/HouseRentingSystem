@@ -381,8 +381,32 @@ public class HousesController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Leave(string id)
+    public async Task<IActionResult> Leave(int id)
     {
-        return RedirectToAction(nameof(Mine));
+        try
+        {
+            if (await _houseService.ExistsAsync(id) == false ||
+                await _houseService.IsRentedAsync(id) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            if (await _houseService.IsRentedByUserIdAsync(id, User.Id()) == false)
+            {
+                _logger.LogInformation("A user with ID {0} is not rented this house", User.Id());
+
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            await _houseService.Leave(id);
+
+            return RedirectToAction(nameof(Mine));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong: {ex}", nameof(Leave));
+
+            return NotFound(ex.Message);
+        }
     }
 }
