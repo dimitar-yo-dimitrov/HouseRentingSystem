@@ -198,7 +198,7 @@ public class HousesController : BaseController
             {
                 _logger.LogInformation("User with id {0} attempted to open other agent house", User.Id());
 
-                return RedirectToPage("Account/AccessDenied", new { area = "Identity" });
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
 
             var house = await _houseService.HouseDetailsByIdAsync(id);
@@ -238,14 +238,14 @@ public class HousesController : BaseController
 
             if (id != house.Id)
             {
-                return RedirectToPage("Account/AccessDenied", new { area = "Identity" });
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
 
             if (await _houseService.HasAgentWithId(id, User.Id()) == false)
             {
                 _logger.LogInformation("User with id {0} attempted to open other agent house", User.Id());
 
-                return RedirectToPage("Account/AccessDenied", new { area = "Identity" });
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
 
             if (await _houseService.ExistsAsync(id) == false)
@@ -288,7 +288,7 @@ public class HousesController : BaseController
             {
                 _logger.LogInformation("User with id {0} attempted to open other agent house", User.Id());
 
-                return RedirectToPage("Account/AccessDenied", new { area = "Identity" });
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
 
             var house = await _houseService.HouseDetailsByIdAsync(id);
@@ -324,7 +324,7 @@ public class HousesController : BaseController
             {
                 _logger.LogInformation("User with id {0} attempted to open other agent house", User.Id());
 
-                return RedirectToPage("Account/AccessDenied", new { area = "Identity" });
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
 
             if (await _houseService.ExistsAsync(house.Id) == false)
@@ -347,9 +347,37 @@ public class HousesController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Rent(string id)
+    public async Task<IActionResult> Rent(int id)
     {
-        return RedirectToAction(nameof(Mine));
+        try
+        {
+            if (await _houseService.ExistsAsync(id) == false)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            if (await _agentService.ExistsByIdAsync(User.Id()))
+            {
+                _logger.LogInformation("A user with ID {0} has already rented this house", User.Id());
+
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
+            if (await _houseService.IsRentedAsync(id))
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            await _houseService.RentAsync(id, User.Id());
+
+            return RedirectToAction(nameof(Mine));
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(MyLogEvents.GetItemNotFound, "Something went wrong: {ex}", nameof(Rent));
+
+            return NotFound(ex.Message);
+        }
     }
 
     [HttpPost]
