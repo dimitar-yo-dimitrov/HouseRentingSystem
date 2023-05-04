@@ -239,9 +239,14 @@ namespace HouseRentingSystem.Core.Services
         public async Task<bool> IsRentedAsync(int houseId)
             => (await _repository.GetByIdAsync<House>(houseId)).RenterId != null;
 
-        public Task<bool> IsRentedByUserIdAsync(int houseId, string userId)
+        public async Task<bool> IsRentedByUserIdAsync(int houseId, string currentUserId)
         {
-            throw new NotImplementedException();
+            var house = await _repository
+                .AllReadonly<House>(h => h.IsActive)
+                .Where(h => h.Id == houseId)
+                .FirstOrDefaultAsync();
+
+            return house != null || house!.RenterId == currentUserId;
         }
 
         public Task RentAsync(int houseId, string userId)
