@@ -13,6 +13,8 @@ namespace HouseRentingSystem.Core.Models.Houses
         [Display(Name = "Image URL")]
         public string ImageUrl { get; init; } = null!;
 
+        public int AgentId { get; init; }
+
         [Display(Name = "Price Per Month")]
         public decimal PricePerMonth { get; init; }
 

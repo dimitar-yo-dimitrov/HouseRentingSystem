@@ -14,7 +14,8 @@
             <br />
             <a asp-controller="Houses" asp-action="Details" asp-route-id="@Model.Id"
                class="btn btn-success">Details</a>
-            @if (User.Identity!.IsAuthenticated || Model.)
+
+            @if (User.Identity!.IsAuthenticated)
             {
                 <a asp-controller="Houses" asp-action="Edit" asp-route-id="@Model.Id"
                    class="btn btn-warning">Edit</a>
@@ -24,14 +25,14 @@
                 @if (!Model.IsRented)
                 {
                     <form class="input-group-sm" asp-controller="Houses"
-                          asp-action="Rent" asp-route-id="@Model.Id" method="post">
+                  asp-action="Rent" asp-route-id="@Model.Id" method="post">
                         <input class="btn btn-primary" type="submit" value="Rent" />
                     </form>
                 }
                 else
                 {
                     <form asp-controller="Houses" asp-action="Leave"
-                          asp-route-id="@Model.Id" method="post">
+                  asp-route-id="@Model.Id" method="post">
                         <input class="btn btn-primary" type="submit" value="Leave" />
                     </form>
                 }

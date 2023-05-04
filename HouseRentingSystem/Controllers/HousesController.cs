@@ -233,7 +233,7 @@ public class HousesController : BaseController
         {
             if (house == null)
             {
-                throw new ArgumentNullException(string.Format(TheModelIsNull));
+                throw new NullReferenceException(string.Format(TheModelIsNull));
             }
 
             if (id != house.Id)
@@ -317,7 +317,7 @@ public class HousesController : BaseController
         {
             if (house == null)
             {
-                throw new ArgumentNullException(string.Format(TheModelIsNull));
+                throw new NullReferenceException(string.Format(TheModelIsNull));
             }
 
             if (await _houseService.HasAgentWithId(house.Id, User.Id()) == false)

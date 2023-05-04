@@ -236,6 +236,19 @@ namespace HouseRentingSystem.Core.Services
             await _repository.SaveChangesAsync();
         }
 
+        public async Task<bool> IsRentedAsync(int houseId)
+            => (await _repository.GetByIdAsync<House>(houseId)).RenterId != null;
+
+        public Task<bool> IsRentedByUserIdAsync(int houseId, string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task RentAsync(int houseId, string userId)
+        {
+            throw new NotImplementedException();
+        }
+
         private static IEnumerable<HouseServiceModel> ProjectToModel(IEnumerable<House> houses)
         {
             var resultHouses = houses

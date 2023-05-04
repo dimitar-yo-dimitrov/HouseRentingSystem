@@ -31,7 +31,7 @@ namespace HouseRentingSystem.Core.Services
 
         public async Task CreateAsync(string userId, string phoneNumber)
         {
-            var agent = new Agent()
+            var agent = new Agent
             {
                 UserId = userId,
                 PhoneNumber = phoneNumber

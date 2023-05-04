@@ -26,6 +26,7 @@ namespace HouseRentingSystem.Core.Models.Houses
         public string Description { get; init; } = null!;
 
         [Required]
+        [Url]
         [Display(Name = "Image URL")]
         public string ImageUrl { get; init; } = null!;
 
